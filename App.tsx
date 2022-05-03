@@ -1,5 +1,10 @@
 import GraphWindow from './components/GraphWindow';
+import Layout from './components/Layout';
 
 export default function App() {
-  return <GraphWindow />;
+  return (
+    <Layout>
+      <GraphWindow />
+    </Layout>
+  );
 }

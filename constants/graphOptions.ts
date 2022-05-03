@@ -2,19 +2,19 @@ const GRAPH_OPTIONS = {
   autoResize: true,
   layout: {
     improvedLayout: true,
-    hierarchical: {
-      enabled: true,
-      direction: 'UD',
-      sortMethod: 'hubsize',
-      levelSeparation: 280,
-      treeSpacing: 0,
-    },
+    // hierarchical: {
+    //   enabled: false,
+    //   direction: 'UD',
+    //   sortMethod: 'hubsize',
+    //   levelSeparation: 280,
+    //   treeSpacing: 100,
+    // },
   },
   edges: {
-    color: '#ffffff',
-    width: 8,
+    color: 'black',
+    width: 4,
     shadow: {
-      enabled: true,
+      enabled: false,
     },
     smooth: {
       enabled: true,
@@ -24,7 +24,7 @@ const GRAPH_OPTIONS = {
     },
   },
   interaction: {
-    dragNodes: false,
+    dragNodes: true,
     dragView: true,
   },
   physics: {
@@ -33,7 +33,7 @@ const GRAPH_OPTIONS = {
       enabled: true,
     },
     hierarchicalRepulsion: {
-      nodeDistance: 280,
+      nodeDistance: 200,
     },
   },
 };
