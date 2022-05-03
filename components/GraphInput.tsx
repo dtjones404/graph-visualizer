@@ -1,15 +1,44 @@
 interface GraphInputProps {
   graphInputData: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputType: string;
+  handleTypeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function GraphInput({
   graphInputData,
-  handleChange,
+  inputType,
+  handleTypeChange,
+  handleTextChange,
 }: GraphInputProps) {
   return (
     <div className="graph-input card">
-      <input type="text" value={graphInputData} onChange={handleChange} />
+      <div className="input-type-selector-container">
+        <input
+          type="radio"
+          id="adjList"
+          name="inputType"
+          value="adjList"
+          checked={inputType === 'adjList'}
+          onChange={handleTypeChange}
+        />
+        <label htmlFor="adjList">Adjacency List</label>
+        <input
+          type="radio"
+          id="adjMatrix"
+          name="inputType"
+          value="adjMatrix"
+          checked={inputType === 'adjMatrix'}
+          onChange={handleTypeChange}
+        />
+        <label htmlFor="adjMatrix">Adjacency Matrix</label>
+      </div>
+      <input
+        type="text"
+        className="graph-data-input"
+        value={graphInputData}
+        onChange={handleTextChange}
+      />
     </div>
   );
 }
