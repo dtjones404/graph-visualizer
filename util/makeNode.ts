@@ -5,7 +5,7 @@ export default function makeNode(nodeId: number): Node {
     id: nodeId,
     font: {
       color: 'black',
-      size: 22,
+      size: 26,
       face: 'robato',
       strokeWidth: 3,
       strokeColor: 'white',

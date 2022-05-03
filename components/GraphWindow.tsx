@@ -22,8 +22,10 @@ export default function GraphWindow() {
     setInputType(e.target.value);
   };
 
-  const [graphInputData, setGraphInputData] = useState('[]');
   const [inputType, setInputType] = useState('adjList');
+  const [graphInputData, setGraphInputData] = useState(
+    '[[1, 4], [0, 3, 4], [1, 3], [2, 4], [0, 1, 3]]'
+  );
 
   return (
     <div className="graph-container">

@@ -17,7 +17,7 @@ const GRAPH_OPTIONS = {
       enabled: false,
     },
     smooth: {
-      enabled: true,
+      enabled: false,
       type: 'discrete',
       forceDirection: 'vertical',
       roundness: 0.8,
@@ -32,8 +32,9 @@ const GRAPH_OPTIONS = {
     stabilization: {
       enabled: true,
     },
+    solver: 'repulsion',
     hierarchicalRepulsion: {
-      nodeDistance: 200,
+      nodeDistance: 100,
     },
   },
 };

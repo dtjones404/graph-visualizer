@@ -1,4 +1,5 @@
 import { Edge, Node } from 'react-graph-vis';
+import makeNode from './makeNode';
 
 export default function createGraphFromAdjList(matrixStr: string) {
   try {
@@ -7,10 +8,10 @@ export default function createGraphFromAdjList(matrixStr: string) {
     const edges: Edge[] = [];
 
     for (let i = 0; i < adjList.length; i++) {
-      nodes.push({ id: i });
+      nodes.push(makeNode(i));
       for (const neigh of adjList[i]) edges.push({ from: i, to: neigh });
     }
-
+    console.log(nodes);
     return { nodes, edges };
   } catch {
     return { nodes: [], edges: [] };

@@ -24,12 +24,10 @@ body {
 }
 
 .header {
-  background-color: teal;
   grid-area: header;
 }
 
 .sidenav {
-  background-color: brown;
   grid-area: sidenav;
 }
 
@@ -67,6 +65,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: stretch;
+  padding-right: 1em;
 }
 
 .input-type-selector-container label {
