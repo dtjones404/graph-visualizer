@@ -32,6 +32,24 @@ export default function GraphInput({
           onChange={handleTypeChange}
         />
         <label htmlFor="adjMatrix">Adjacency Matrix</label>
+        <input
+          type="radio"
+          id="edgeList"
+          name="inputType"
+          value="edgeList"
+          checked={inputType === 'edgeList'}
+          onChange={handleTypeChange}
+        />
+        <label htmlFor="edgeList">Edge List</label>
+        <input
+          type="radio"
+          id="adjMap"
+          name="inputType"
+          value="adjMap"
+          checked={inputType === 'adjMap'}
+          onChange={handleTypeChange}
+        />
+        <label htmlFor="adjMap">Adjacency Map</label>
       </div>
       <input
         type="text"

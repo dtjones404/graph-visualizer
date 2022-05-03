@@ -1,6 +1,6 @@
 import { Node } from 'react-graph-vis';
 
-export default function makeNode(nodeId: number): Node {
+export default function makeNode(nodeId: string | number): Node {
   return {
     id: nodeId,
     font: {

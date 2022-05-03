@@ -32,6 +32,9 @@ const GRAPH_OPTIONS = {
     stabilization: {
       enabled: true,
     },
+    repulsion: {
+      nodeDistance: 200,
+    },
     solver: 'repulsion',
     hierarchicalRepulsion: {
       nodeDistance: 100,

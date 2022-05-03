@@ -11,7 +11,7 @@ export default function createGraphFromAdjList(matrixStr: string) {
       nodes.push(makeNode(i));
       for (const neigh of adjList[i]) edges.push({ from: i, to: neigh });
     }
-    console.log(nodes);
+
     return { nodes, edges };
   } catch {
     return { nodes: [], edges: [] };

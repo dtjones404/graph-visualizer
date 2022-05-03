@@ -4,6 +4,8 @@ import GraphInput from './GraphInput';
 import { useState } from 'react';
 import createGraphFromAdjMatrix from '../util/createGraphFromAdjMatrix';
 import createGraphFromAdjList from '../util/createGraphFromAdjList';
+import createGraphFromEdgeList from '../util/createGraphFromEdgeList';
+import createGraphFromAdjMap from '../util/createGraphFromAdjMap';
 
 interface InputTypesToFunctions {
   [key: string]: Function;
@@ -11,6 +13,8 @@ interface InputTypesToFunctions {
 const INPUT_TYPES_TO_FUNCTIONS: InputTypesToFunctions = {
   adjList: createGraphFromAdjList,
   adjMatrix: createGraphFromAdjMatrix,
+  edgeList: createGraphFromEdgeList,
+  adjMap: createGraphFromAdjMap,
 };
 
 export default function GraphWindow() {
@@ -20,6 +24,7 @@ export default function GraphWindow() {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputType(e.target.value);
+    console.log(e.target.value);
   };
 
   const [inputType, setInputType] = useState('adjList');
