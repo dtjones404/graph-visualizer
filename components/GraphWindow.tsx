@@ -24,7 +24,6 @@ export default function GraphWindow() {
 
   const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputType(e.target.value);
-    console.log(e.target.value);
   };
 
   const [inputType, setInputType] = useState('adjList');

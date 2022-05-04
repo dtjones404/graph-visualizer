@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "start": "",
     "dev": "webpack serve",
     "test": "jest",
-    "deploy": "aws s3 cp ./dist/ $S3_URI --recursive"
+    "deploy": "aws s3 sync ./dist/ $S3_URI"
   },
   "keywords": [],
   "author": "",
