@@ -2,19 +2,22 @@ const GRAPH_OPTIONS = {
   autoResize: true,
   layout: {
     improvedLayout: true,
-    // hierarchical: {
-    //   enabled: false,
-    //   direction: 'UD',
-    //   sortMethod: 'hubsize',
-    //   levelSeparation: 280,
-    //   treeSpacing: 100,
-    // },
+    hierarchical: {
+      enabled: false,
+      direction: 'LR',
+      sortMethod: 'hubsize',
+      levelSeparation: 280,
+      treeSpacing: 100,
+    },
   },
   edges: {
     color: 'black',
     width: 4,
+    font: {
+      size: 18,
+    },
     shadow: {
-      enabled: false,
+      enabled: true,
     },
     smooth: {
       enabled: false,
@@ -29,13 +32,13 @@ const GRAPH_OPTIONS = {
   },
   physics: {
     enabled: true,
+    solver: 'repulsion',
     stabilization: {
       enabled: true,
     },
     repulsion: {
       nodeDistance: 200,
     },
-    solver: 'repulsion',
     hierarchicalRepulsion: {
       nodeDistance: 100,
     },

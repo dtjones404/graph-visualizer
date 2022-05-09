@@ -8,7 +8,7 @@ export default function createGraphFromEdgeList(matrixStr: string) {
     const edges: Edge[] = [];
     const nodeIds: Set<string> = new Set();
 
-    for (const [a, b] of edgeList) {
+    for (const [a, b, cost] of edgeList) {
       const aId = String(a);
       const bId = String(b);
 
@@ -18,8 +18,9 @@ export default function createGraphFromEdgeList(matrixStr: string) {
           nodeIds.add(id);
         }
       }
-
-      edges.push({ from: a, to: b });
+      const edge: Edge = { from: a, to: b };
+      if (cost !== undefined) edge.label = String(cost);
+      edges.push(edge);
     }
 
     return { nodes, edges };

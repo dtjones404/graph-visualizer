@@ -3,7 +3,14 @@ declare module 'react-graph-vis' {
   import { Network, NetworkEvents, Options, Node, Edge, DataSet } from 'vis';
   import { Component } from 'react';
 
-  export { Network, NetworkEvents, Options, Node, Edge, DataSet } from 'vis';
+  export { Network, NetworkEvents, Options, Node, DataSet } from 'vis';
+
+  export interface Edge {
+    to: string | number;
+    from: string | number;
+    label?: string;
+    color?: string;
+  }
 
   export interface graphEvents {
     [event: NetworkEvents]: (params?: any) => void;
