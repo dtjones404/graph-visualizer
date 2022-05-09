@@ -1,7 +1,7 @@
 import Graph from 'react-graph-vis';
 import GRAPH_OPTIONS from '../constants/graphOptions';
 import GraphInput from './GraphInput';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import createGraphFromAdjMatrix from '../util/createGraphFromAdjMatrix';
 import createGraphFromAdjList from '../util/createGraphFromAdjList';
 import createGraphFromEdgeList from '../util/createGraphFromEdgeList';
@@ -43,6 +43,11 @@ export default function GraphWindow() {
   const [isHierarchical, setIsHierarchical] = useState(false);
   const [repulsion, setRepulsion] = useState('200');
 
+  const graph = useMemo(
+    () => INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData),
+    [graphInputData, inputType]
+  );
+
   const options = JSON.parse(JSON.stringify(GRAPH_OPTIONS));
   options.layout.hierarchical.enabled = isHierarchical;
   options.physics.repulsion.springLength = +repulsion;
@@ -61,13 +66,7 @@ export default function GraphWindow() {
         repulsion={repulsion}
         handleRepulsionChange={handleRepulsionChange}
       />
-      <Graph
-        graph={detectCycles(
-          INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData)
-        )}
-        options={options}
-        events={{}}
-      />
+      <Graph graph={graph} options={options} events={{}} />
     </div>
   );
 }
