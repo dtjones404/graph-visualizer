@@ -10,17 +10,19 @@ interface Graph {
 }
 
 export default function detectCycles({ nodes, edges }: Graph) {
-  const dfs = (node: string, prev: string, visited: Set<string>) => {
+  const dfs = (node: string, prev: string, path: string[]) => {
+    path.push(node);
     if (finished.has(node)) return;
-    if (visited.has(node)) {
+    if (visited[node] !== undefined) {
       //cycle found
-      visited.forEach((node) => cycleNodes.add(node));
+      const cycleStart = visited[node];
+      path.slice(cycleStart).forEach((node) => cycleNodes.add(node));
       return;
     }
-    visited.add(node);
+    visited[node] = path.length - 1;
     if (adjMap[node])
       adjMap[node].forEach((neigh) => {
-        if (neigh !== prev) dfs(neigh, node, visited);
+        if (neigh !== prev) dfs(neigh, node, path);
       });
     finished.add(node);
   };
@@ -35,10 +37,10 @@ export default function detectCycles({ nodes, edges }: Graph) {
     adjMap[from].push(to);
   }
 
+  const visited: { [key: string]: number } = {};
   const finished = new Set();
   nodes.forEach((node) => {
-    const visited: Set<string> = new Set();
-    dfs(String(node.id), '', visited);
+    dfs(String(node.id), '', []);
   });
 
   //mark nodes which are part of cycle
