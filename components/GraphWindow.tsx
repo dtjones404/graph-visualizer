@@ -7,6 +7,7 @@ import createGraphFromEdgeList from '../util/createGraphFromEdgeList';
 import createGraphFromAdjMap from '../util/createGraphFromAdjMap';
 import GraphControlPanel from './GraphControlPanel';
 import detectCycles from '../util/detectCycles';
+import Loading from './Loading';
 
 const Graph = lazy(() => import('react-graph-vis'));
 
@@ -80,8 +81,13 @@ export default function GraphWindow() {
         repulsion={repulsion}
         handleRepulsionChange={handleRepulsionChange}
       />
-      <Suspense fallback={<h2>oops</h2>}>
-        <Graph graph={graph} options={options} events={{}} />
+      <Suspense fallback={<Loading />}>
+        <Graph
+          graph={graph}
+          options={options}
+          events={{}}
+          style={{ height: 'calc(100% - 125px)' }}
+        />
       </Suspense>
     </div>
   );

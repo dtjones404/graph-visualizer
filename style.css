@@ -19,8 +19,18 @@ body {
     'sidenav content';
 }
 
+.content-container {
+  height: calc(97vh - 100px);
+  display: flex;
+  flex-direction: column;
+  grid-area: 'content';
+  overflow: hidden;
+}
+
 .graph-container {
-  height: calc(90vh - 100px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .header {
@@ -52,12 +62,8 @@ body {
 
 .graph-input {
   display: flex;
+  height: 75px;
   width: 100%;
-}
-
-.content-container {
-  height: calc(98vh - 100px);
-  grid-area: 'content';
 }
 
 .input-type-selector-container {
@@ -83,5 +89,5 @@ body {
 }
 
 .graph-control-panel-container {
-  
+  height: 50px;
 }
