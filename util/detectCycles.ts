@@ -41,12 +41,13 @@ export default function detectCycles({ nodes, edges }: Graph) {
     dfs(String(node.id), '', visited);
   });
 
+  //mark nodes which are part of cycle
   edges.forEach((edge) => {
     const from = String(edge.from);
     const to = String(edge.to);
 
     if (cycleNodes.has(from) && cycleNodes.has(to)) {
-      edge.color = 'red'; //mark nodes which are part of cycle
+      edge.color = 'red';
     }
   });
 

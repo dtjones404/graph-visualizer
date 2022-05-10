@@ -1,13 +1,14 @@
-import Graph from 'react-graph-vis';
 import GRAPH_OPTIONS from '../constants/graphOptions';
 import GraphInput from './GraphInput';
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import createGraphFromAdjMatrix from '../util/createGraphFromAdjMatrix';
 import createGraphFromAdjList from '../util/createGraphFromAdjList';
 import createGraphFromEdgeList from '../util/createGraphFromEdgeList';
 import createGraphFromAdjMap from '../util/createGraphFromAdjMap';
 import GraphControlPanel from './GraphControlPanel';
 import detectCycles from '../util/detectCycles';
+
+const Graph = lazy(() => import('react-graph-vis'));
 
 interface InputTypesToFunctions {
   [key: string]: Function;
@@ -79,7 +80,9 @@ export default function GraphWindow() {
         repulsion={repulsion}
         handleRepulsionChange={handleRepulsionChange}
       />
-      <Graph graph={graph} options={options} events={{}} />
+      <Suspense fallback={<h2>oops</h2>}>
+        <Graph graph={graph} options={options} events={{}} />
+      </Suspense>
     </div>
   );
 }
