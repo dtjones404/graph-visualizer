@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-  mode: 'development',
   entry: {
     main: path.resolve(__dirname, './index.tsx'),
   },
@@ -10,19 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     assetModuleFilename: '[name].[ext]',
-  },
-  devtool: 'inline-source-map',
-  devServer: {
-    static: path.resolve(__dirname, 'dist'),
-    port: 8080,
-    open: false,
-    hot: true,
-    proxy: {
-      '/api/': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-    },
+    clean: true,
   },
   // loaders
   module: {
@@ -31,20 +20,9 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       // images
       { test: /\.(svg|ico|png|webp|jpg|gif|jpeg)$/, type: 'asset/resource' },
-      // js for babel
-      {
-        test: /.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
-      },
       // tsx for ts-loader
       {
-        test: /.(ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: 'ts-loader',
       },
@@ -55,6 +33,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    new BundleAnalyzerPlugin(),
   ],
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
