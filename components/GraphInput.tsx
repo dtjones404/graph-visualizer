@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 interface GraphInputProps {
   graphInputData: string;
   inputType: string;
@@ -11,6 +13,11 @@ export default function GraphInput({
   handleTypeChange,
   handleTextChange,
 }: GraphInputProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef.current!.focus();
+  }, []);
+
   return (
     <div className="graph-input card">
       <div className="input-type-selector-container">
@@ -54,6 +61,7 @@ export default function GraphInput({
       <input
         type="text"
         className="graph-data-input"
+        ref={inputRef}
         value={graphInputData}
         onChange={handleTextChange}
       />

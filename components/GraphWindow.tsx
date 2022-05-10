@@ -20,8 +20,30 @@ const INPUT_TYPES_TO_FUNCTIONS: InputTypesToFunctions = {
 };
 
 export default function GraphWindow() {
+  const [inputType, setInputType] = useState('adjList');
+  const [graphInputData, setGraphInputData] = useState(
+    '[[1, 4], [0, 3, 4], [1, 3], [2, 4], [0, 1, 3]]'
+  );
+  const [isHierarchical, setIsHierarchical] = useState(false);
+  const [repulsion, setRepulsion] = useState('200');
+
+  const graph = useMemo(
+    () => detectCycles(INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData)),
+    [graphInputData, inputType]
+  );
+
+  const options = useMemo(() => {
+    return JSON.parse(JSON.stringify(GRAPH_OPTIONS));
+  }, [repulsion, isHierarchical]);
+  options.layout.hierarchical.enabled = isHierarchical;
+  options.physics.repulsion.springLength = +repulsion;
+
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGraphInputData(e.target.value);
+  };
+
+  const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputType(e.target.value);
   };
 
   const handleHierarchicalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,26 +53,6 @@ export default function GraphWindow() {
   const handleRepulsionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRepulsion(e.target.value);
   };
-
-  const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputType(e.target.value);
-  };
-
-  const [inputType, setInputType] = useState('adjList');
-  const [graphInputData, setGraphInputData] = useState(
-    '[[1, 4], [0, 3, 4], [1, 3], [2, 4], [0, 1, 3]]'
-  );
-  const [isHierarchical, setIsHierarchical] = useState(false);
-  const [repulsion, setRepulsion] = useState('200');
-
-  const graph = useMemo(
-    () => INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData),
-    [graphInputData, inputType]
-  );
-
-  const options = JSON.parse(JSON.stringify(GRAPH_OPTIONS));
-  options.layout.hierarchical.enabled = isHierarchical;
-  options.physics.repulsion.springLength = +repulsion;
 
   return (
     <div className="graph-container">

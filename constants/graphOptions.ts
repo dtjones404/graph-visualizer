@@ -38,6 +38,7 @@ const GRAPH_OPTIONS = {
     },
     repulsion: {
       nodeDistance: 200,
+      springLength: 200,
     },
     hierarchicalRepulsion: {
       nodeDistance: 100,
