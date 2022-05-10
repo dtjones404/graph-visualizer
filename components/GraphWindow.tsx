@@ -1,7 +1,7 @@
 import Graph from 'react-graph-vis';
 import GRAPH_OPTIONS from '../constants/graphOptions';
 import GraphInput from './GraphInput';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import createGraphFromAdjMatrix from '../util/createGraphFromAdjMatrix';
 import createGraphFromAdjList from '../util/createGraphFromAdjList';
 import createGraphFromEdgeList from '../util/createGraphFromEdgeList';
@@ -18,14 +18,25 @@ const INPUT_TYPES_TO_FUNCTIONS: InputTypesToFunctions = {
   edgeList: createGraphFromEdgeList,
   adjMap: createGraphFromAdjMap,
 };
+const EXAMPLE_INPUT = '[[1, 4], [0, 3, 4], [1, 3], [2, 4], [0, 1, 3]]';
 
 export default function GraphWindow() {
-  const [inputType, setInputType] = useState('adjList');
+  const [inputType, setInputType] = useState(
+    localStorage.getItem('inputType') ?? 'adjList'
+  );
   const [graphInputData, setGraphInputData] = useState(
-    '[[1, 4], [0, 3, 4], [1, 3], [2, 4], [0, 1, 3]]'
+    localStorage.getItem('graphInput') ?? EXAMPLE_INPUT
   );
   const [isHierarchical, setIsHierarchical] = useState(false);
   const [repulsion, setRepulsion] = useState('200');
+
+  useEffect(() => {
+    localStorage.setItem('graphInput', graphInputData);
+  }, [graphInputData]);
+
+  useEffect(() => {
+    localStorage.setItem('inputType', inputType);
+  }, [inputType]);
 
   const graph = useMemo(
     () => detectCycles(INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData)),

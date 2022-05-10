@@ -13,9 +13,9 @@ export default function GraphInput({
   handleTypeChange,
   handleTextChange,
 }: GraphInputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null!);
   useEffect(() => {
-    inputRef.current!.focus();
+    inputRef.current.focus();
   }, []);
 
   return (
