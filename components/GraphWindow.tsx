@@ -30,6 +30,7 @@ export default function GraphWindow() {
     localStorage.getItem('graphInput') ?? EXAMPLE_INPUT
   );
   const [isHierarchical, setIsHierarchical] = useState(false);
+  const [showCycles, setShowCycles] = useState(false);
   const [repulsion, setRepulsion] = useState('200');
 
   useEffect(() => {
@@ -40,10 +41,11 @@ export default function GraphWindow() {
     localStorage.setItem('inputType', inputType);
   }, [inputType]);
 
-  const graph = useMemo(
-    () => detectCycles(INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData)),
-    [graphInputData, inputType]
-  );
+  const graph = useMemo(() => {
+    const graphData = INPUT_TYPES_TO_FUNCTIONS[inputType](graphInputData);
+    if (showCycles) detectCycles(graphData);
+    return graphData;
+  }, [graphInputData, inputType, showCycles]);
 
   const options = useMemo(() => {
     return JSON.parse(JSON.stringify(GRAPH_OPTIONS));
@@ -63,6 +65,10 @@ export default function GraphWindow() {
     setIsHierarchical((prevState) => !prevState);
   };
 
+  const handleShowCyclesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowCycles((prevState) => !prevState);
+  };
+
   const handleRepulsionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRepulsion(e.target.value);
   };
@@ -78,6 +84,8 @@ export default function GraphWindow() {
       <GraphControlPanel
         isHierarchical={isHierarchical}
         handleHierarchicalChange={handleHierarchicalChange}
+        showCycles={showCycles}
+        handleShowCyclesChange={handleShowCyclesChange}
         repulsion={repulsion}
         handleRepulsionChange={handleRepulsionChange}
       />

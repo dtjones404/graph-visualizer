@@ -1,6 +1,8 @@
 interface GraphControlPanelProps {
   isHierarchical: boolean;
   handleHierarchicalChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  showCycles: boolean;
+  handleShowCyclesChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   repulsion: string;
   handleRepulsionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -8,6 +10,8 @@ interface GraphControlPanelProps {
 export default function GraphControlPanel({
   isHierarchical,
   handleHierarchicalChange,
+  showCycles,
+  handleShowCyclesChange,
   repulsion,
   handleRepulsionChange,
 }: GraphControlPanelProps) {
@@ -21,6 +25,14 @@ export default function GraphControlPanel({
         onChange={handleHierarchicalChange}
       />
       <label htmlFor="isHierarchical">Hierarchical</label>
+      <input
+        type="checkbox"
+        id="showCycles"
+        name="showCycles"
+        checked={showCycles}
+        onChange={handleShowCyclesChange}
+      />
+      <label htmlFor="ShowCycles">Show Cycles</label>
       <input
         type="range"
         min="40"
